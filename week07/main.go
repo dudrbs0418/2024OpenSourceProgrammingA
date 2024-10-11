@@ -3,18 +3,27 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
 func main() {
-	var army string = "우리는 ?가와 ?민에 충성을 다하는 대한민? 육군이다"
-	armyFixed := strings.NewReplacer("?", "국")
-	fmt.Println(army)
-	fmt.Println(armyFixed.Replace(army))
-	in := bufio.NewReader(os.Stdin)
-	fmt.Print("Input your name : ")
-	name, err := in.ReadString('\n')
-	fmt.Println(name)
-	fmt.Println(err)
+	fmt.Print("점수 입력 : ")
+	r := bufio.NewReader(os.Stdin)
+	i, err := r.ReadString('\n')
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	i = strings.TrimSpace(i)                  // python strip
+	score, err := strconv.ParseInt(i, 16, 32) // 문자열 변수 i의 값을 정수형(32비트)으로 변환, 입력받은 값은 16진수로 처리
+	if score >= 95 {
+		fmt.Println("A")
+		fmt.Printf("%d\n", score)
+	} else {
+		fmt.Println("BCDF")
+		fmt.Printf("%d\n", score)
+	}
 }
